@@ -1,0 +1,12 @@
+.env*
+node_modules/
+config.json
+service-token
+launch.json
+install-root.json
+setup-start.lock
+state/
+startup/
+program-*/
+*.wal
+*.log

@@ -1,0 +1,12 @@
+{
+  "version": "5.7.6",
+  "realm": "international",
+  "bootstrapMarker": "[BootstrapServerProbe]",
+  "files": {
+    "package.json": "096b2dbd19a33671652255bd40da0d728eb6618a029443cfeed61adadc223e18",
+    "main/server.js": "ea34950748468888c7b7a7467364f562abb5e91ded104455c5761bbf5e6ddab7",
+    "main/tar.js": "faaf8242cf7b5157e45d4b16bd80833f3b6e216021f8934928f851454601d91b",
+    "main/code-cache.js": "bd50cca17ec76dcb8063cdc45719d0df18887a7bc5a4559e48cc947cd0fd1f17",
+    "main/daemon-app-server-entry.js": "233ce248d652694a57fc7724b27f5a6c673dfda66ca9e3772a780a4d50bd269e"
+  }
+}

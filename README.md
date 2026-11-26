@@ -2,13 +2,29 @@
 
 一个本机原生会话桥接库，提供带鉴权的 HTTP API、会话与请求指纹、持久化事件及 SSE 续读。宿主提供已获授权的原生会话服务和可信身份，桥接层沿用宿主的工具审批流程。
 
-公开版采用 MIT 许可证，适用于本仓库的原创代码。接入正式环境需要自备 WorkBuddy 客户端和有权使用的宿主集成。当前版提供源码库，官方客户端、安装包、管理后台和账号迁移组件均独立于此库。
+公开版采用 MIT 许可证，适用于本仓库的原创代码。Windows 安装器使用本机已有的 WorkBuddy 桌面客户端，启动独立的应用数据目录。WorkBuddy 客户端由其发行方单独提供。
+
+## Windows 安装和启动
+
+1. 安装 Node.js 22.16 或更新版本，并准备 WorkBuddy AI **5.7.6**。安装程序会检查这一版本受支持的文件指纹。
+2. 下载本仓库 ZIP 并完整解压，双击 `Install.cmd`。根据提示输入官方 WorkBuddy 安装目录，或者 `WorkBuddyAI.exe` 的完整路径。
+3. 双击解压目录或安装输出所指目录里的 `Start.cmd`。在打开的独立 WorkBuddy 窗口使用官方登录界面。启动端口和状态会输出在控制台，也可在解压目录运行 `npm run status` 查询。
+
+安装默认写入当前用户的 `%LOCALAPPDATA%\WorkBuddyPangPangXiong`。本机服务凭据由安装程序随机生成，保存在该目录的 `service-token` 中。客户端从本机读取，作为 Bearer 凭据使用。运行数据和会话记录保存在受当前用户权限保护的 `state` 子目录。
+
+配置文件 `config.json` 保存官方安装位置、允许使用的工作目录和端口。关闭独立窗口后可以重新运行安装更新配置，已有会话和本机服务凭据继续使用。例如在解压目录的 PowerShell 中运行：
+
+```powershell
+.\Install.cmd --workbuddy-root 'C:\Program Files\WorkBuddyAI' --workspace 'C:\MyWorkspace' --port 0
+```
+
+`--port 0` 让系统分配端口，程序只监听本机回环。用 `npm run check:workbuddy -- --workbuddy-root '<安装目录>'` 可以仅核对版本和文件指纹。
 
 ## 运行模拟测试
 
 安装 Node.js 22.16 或更新版本后运行 `npm test`。测试使用合成数据和本机回环连接，无需 npm 运行时依赖、WorkBuddy 登录或模型请求。
 
-## 集成方式
+## Node.js 库集成
 
 在拥有已授权 `daemon` 的宿主进程中调用 `mountNativeBridge`。`getIdentity` 由宿主实现，并提供 `instanceId`、`ownerId`、`realm` 和 `generation`。`dataRoot` 和 `allowedWorkspaces` 使用绝对路径。运行目录可能包含会话内容，应配置为仅当前服务用户可访问。服务监听 `127.0.0.1`。
 

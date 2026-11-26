@@ -1,6 +1,6 @@
 {
   "name": "workbuddy-proxy-pangpangxiong",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "workbuddy反代胖胖熊助手的本机原生会话桥接与 SSE 回放",
@@ -11,6 +11,10 @@
     "./fingerprint": "./src/fingerprint.cjs"
   },
   "scripts": {
+    "setup": "node scripts/public-desktop.mjs install",
+    "start": "node scripts/public-desktop.mjs start",
+    "status": "node scripts/public-desktop.mjs status",
+    "check:workbuddy": "node scripts/public-desktop.mjs check",
     "test": "node --test test/event-journal.test.mjs test/http-node-identity.test.mjs test/public-native.test.mjs test/session-dispatch-hook.test.mjs"
   }
 }
