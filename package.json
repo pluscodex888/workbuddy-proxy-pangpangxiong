@@ -1,6 +1,6 @@
 {
   "name": "workbuddy-proxy-pangpangxiong",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "type": "module",
   "description": "workbuddy反代胖胖熊助手的本机原生会话桥接与 SSE 回放",

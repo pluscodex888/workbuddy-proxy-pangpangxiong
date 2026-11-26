@@ -7,7 +7,7 @@
 ## Windows 安装和启动
 
 1. 安装 Node.js 22.16 或更新版本，并准备 WorkBuddy AI **5.7.6**。安装程序会检查这一版本受支持的文件指纹。
-2. 在 GitHub Releases 下载 `workbuddy-pangpangxiong-0.3.0-setup.exe`，运行安装向导，选择 `WorkBuddyAI.exe`、工作目录和本机端口。
+2. 在 GitHub Releases 下载 `workbuddy-pangpangxiong-0.3.1-setup.exe`，运行安装向导，选择 `WorkBuddyAI.exe`、工作目录和本机端口。
 3. 从 Windows 开始菜单打开 **WorkBuddy 胖胖熊助手**。在独立 WorkBuddy 窗口使用官方登录界面。启动端口和状态会输出在控制台，也可在安装目录运行 `npm run status` 查询。
 
 源码 ZIP 也可以安装。解压后运行 `Install.cmd` 并选择 WorkBuddy 安装位置，再运行 `Start.cmd`。
@@ -30,13 +30,36 @@
 npm run build:nsis
 ```
 
-默认生成 `dist/workbuddy-pangpangxiong-0.3.0-setup.exe`。用 `--makensis '<makensis.exe 路径>'` 指定编译器，用 `--output '<新 EXE 路径>'` 修改输出位置，两个选项都放在 `npm run build:nsis --` 后面。
+默认生成 `dist/workbuddy-pangpangxiong-0.3.1-setup.exe`。用 `--makensis '<makensis.exe 路径>'` 指定编译器，用 `--output '<新 EXE 路径>'` 修改输出位置，两个选项都放在 `npm run build:nsis --` 后面。
 
 - [安装向导源码](installer/workbuddy-public.nsi)
 - [构建脚本](scripts/build-public-nsis.mjs)
 - [安装器载荷清单](installer/public-files.json)
 
 安装器使用当前用户权限，安装时从本机读取 WorkBuddy 路径。卸载会移除安装目录中的发布文件和对应的开始菜单入口，保留本机工作目录、配置和会话数据。
+
+### 用本地资源构建单文件离线安装器
+
+准备本机已有的 WorkBuddy AI 5.7.6 Windows x64 原始安装器，以及包含 `7z.exe`、`7z.dll` 和 `License.txt` 的 7-Zip 26.06 目录。下列命令从源码根目录运行。请将前三个路径换成本机位置，暂存目录使用新目录，并预留约 3 GB 空间。
+
+```powershell
+$installer = 'C:\Installers\WorkBuddy-5.7.6-x64.exe'
+$tools = 'C:\Program Files\7-Zip'
+$stage = 'C:\Build\workbuddy-5.7.6'
+$seven = Join-Path $tools '7z.exe'
+$archive = Join-Path $stage 'app-64.7z'
+$runtime = Join-Path $stage 'WorkBuddyAI'
+& $seven e $installer '$PLUGINSDIR\app-64.7z' "-o$stage"
+if ($LASTEXITCODE) { throw '无法提取 WorkBuddy 安装载荷' }
+& $seven x $archive "-o$runtime"
+if ($LASTEXITCODE) { throw '无法解包 WorkBuddy 安装载荷' }
+npm run build:nsis -- --local-workbuddy-root $runtime `
+  --local-runtime-archive $archive `
+  --local-runtime-sha256 6af222cb354c160b5b51702548c252813200fe360e1e38dde2f77ca31d175f8e `
+  --local-extractor-root $tools
+```
+
+生成的 `dist/workbuddy-pangpangxiong-0.3.1-offline-setup.exe` 含客户端载荷，安装时校验后解包。客户端资源来自上述原始安装器，账号、配置和会话数据由安装后的独立实例生成。运行仍需本机 Node.js 22.16 或更新版本。公开发布的安装器使用本机已有的 WorkBuddy 客户端。
 
 ## 运行模拟测试
 
