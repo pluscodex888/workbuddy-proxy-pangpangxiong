@@ -2,6 +2,20 @@
 
 ![workbuddy反代胖胖熊助手。原生会话、SSE 续读、本地独立运行。](docs/media/workbuddy-pangpangxiong-banner.webp)
 
+## Telegram 交流群
+
+<img src="docs/media/telegram-group-qr.png" alt="Telegram 交流群邀请二维码" width="192">
+
+[加入 Telegram 群](https://t.me/+aRonJd4M4ow0MGY1)
+
+## 赞助商
+
+**novecloud** 提供自研加密隧道。新人首月送 **200G 流量**免费体验。
+
+QQ群 **555657982** · [novecloud 官网](https://n.novecd.com/)
+
+## 项目介绍
+
 一个本机原生会话桥接库，提供带鉴权的 HTTP API、会话与请求指纹、持久化事件及 SSE 续读。宿主提供已获授权的原生会话服务和可信身份，桥接层沿用宿主的工具审批流程。
 
 开源版支持在独立的 WorkBuddy 窗口登录和使用会话。本机接口只监听回环地址，使用安装时生成的密钥鉴权。连接中断后，可从上次收到的事件继续读取。
