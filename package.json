@@ -1,0 +1,16 @@
+{
+  "name": "workbuddy-proxy-pangpangxiong",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "workbuddy反代胖胖熊助手的本机原生会话桥接与 SSE 回放",
+  "license": "MIT",
+  "engines": { "node": ">=22.16" },
+  "exports": {
+    ".": "./src/public-native.mjs",
+    "./fingerprint": "./src/fingerprint.cjs"
+  },
+  "scripts": {
+    "test": "node --test test/event-journal.test.mjs test/http-node-identity.test.mjs test/public-native.test.mjs test/session-dispatch-hook.test.mjs"
+  }
+}
