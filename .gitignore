@@ -1,5 +1,6 @@
 .env*
 node_modules/
+dist/
 config.json
 service-token
 launch.json
@@ -10,3 +11,4 @@ startup/
 program-*/
 *.wal
 *.log
+setup-error.txt

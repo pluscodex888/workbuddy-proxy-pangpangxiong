@@ -221,6 +221,8 @@ async function start(home, config) {
 }
 
 async function main() {
+  const [nodeMajor, nodeMinor] = process.versions.node.split('.').map(Number);
+  if (nodeMajor < 22 || (nodeMajor === 22 && nodeMinor < 16)) throw Error('Node.js 22.16 or newer is required');
   const [command, ...args] = process.argv.slice(2);
   if (!['install', 'start', 'status', 'check'].includes(command))
     throw Error('usage: public-desktop.mjs install|start|status|check [--home path] [--workbuddy-root path] [--workspace path] [--port 0]');

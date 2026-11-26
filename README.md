@@ -7,8 +7,10 @@
 ## Windows 安装和启动
 
 1. 安装 Node.js 22.16 或更新版本，并准备 WorkBuddy AI **5.7.6**。安装程序会检查这一版本受支持的文件指纹。
-2. 下载本仓库 ZIP 并完整解压，双击 `Install.cmd`。根据提示输入官方 WorkBuddy 安装目录，或者 `WorkBuddyAI.exe` 的完整路径。
-3. 双击解压目录或安装输出所指目录里的 `Start.cmd`。在打开的独立 WorkBuddy 窗口使用官方登录界面。启动端口和状态会输出在控制台，也可在解压目录运行 `npm run status` 查询。
+2. 在 GitHub Releases 下载 `workbuddy-pangpangxiong-0.3.0-setup.exe`，运行安装向导，选择 `WorkBuddyAI.exe`、工作目录和本机端口。
+3. 从 Windows 开始菜单打开 **WorkBuddy 胖胖熊助手**。在独立 WorkBuddy 窗口使用官方登录界面。启动端口和状态会输出在控制台，也可在安装目录运行 `npm run status` 查询。
+
+源码 ZIP 也可以安装。解压后运行 `Install.cmd` 并选择 WorkBuddy 安装位置，再运行 `Start.cmd`。
 
 安装默认写入当前用户的 `%LOCALAPPDATA%\WorkBuddyPangPangXiong`。本机服务凭据由安装程序随机生成，保存在该目录的 `service-token` 中。客户端从本机读取，作为 Bearer 凭据使用。运行数据和会话记录保存在受当前用户权限保护的 `state` 子目录。
 
@@ -19,6 +21,22 @@
 ```
 
 `--port 0` 让系统分配端口，程序只监听本机回环。用 `npm run check:workbuddy -- --workbuddy-root '<安装目录>'` 可以仅核对版本和文件指纹。
+
+## 从源码构建 NSIS 安装包
+
+在 Windows 上安装 NSIS **3.12** 后，在源码根目录执行：
+
+```powershell
+npm run build:nsis
+```
+
+默认生成 `dist/workbuddy-pangpangxiong-0.3.0-setup.exe`。用 `--makensis '<makensis.exe 路径>'` 指定编译器，用 `--output '<新 EXE 路径>'` 修改输出位置，两个选项都放在 `npm run build:nsis --` 后面。
+
+- [安装向导源码](installer/workbuddy-public.nsi)
+- [构建脚本](scripts/build-public-nsis.mjs)
+- [安装器载荷清单](installer/public-files.json)
+
+安装器使用当前用户权限，安装时从本机读取 WorkBuddy 路径。卸载会移除安装目录中的发布文件和对应的开始菜单入口，保留本机工作目录、配置和会话数据。
 
 ## 运行模拟测试
 
