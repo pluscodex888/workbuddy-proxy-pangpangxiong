@@ -31,8 +31,10 @@ QQ群 **555657982** · [novecloud 官网](https://n.novecd.com/)
 ## Windows 安装和启动
 
 1. 安装 Node.js 22.16 或更新版本，并准备 WorkBuddy AI **5.7.6**。安装程序会检查这一版本受支持的文件指纹。
-2. 在 GitHub Releases 下载 `workbuddy-pangpangxiong-0.3.1-setup.exe`，运行安装向导，选择 `WorkBuddyAI.exe`、工作目录和本机端口。
+2. 在 GitHub Releases 下载 `workbuddy-pangpangxiong-0.3.2-setup.exe`，运行安装向导，选择 `WorkBuddyAI.exe`、工作目录和本机端口。
 3. 从 Windows 开始菜单打开 **WorkBuddy 胖胖熊助手**。在独立 WorkBuddy 窗口使用官方登录界面。启动端口和状态会输出在控制台，也可在安装目录运行 `npm run status` 查询。
+
+打开顶部 **Help（帮助）** 菜单，选择 **胖胖熊·交流群** 可打开 QQ 群 **794944238** 的入群页面。下面的 **赞助商 · novecloud** 显示体验信息，支持打开官网或复制赞助商 QQ 群号。
 
 源码 ZIP 也可以安装。解压后运行 `Install.cmd` 并选择 WorkBuddy 安装位置，再运行 `Start.cmd`。
 
@@ -54,7 +56,7 @@ QQ群 **555657982** · [novecloud 官网](https://n.novecd.com/)
 npm run build:nsis
 ```
 
-默认生成 `dist/workbuddy-pangpangxiong-0.3.1-setup.exe`。用 `--makensis '<makensis.exe 路径>'` 指定编译器，用 `--output '<新 EXE 路径>'` 修改输出位置，两个选项都放在 `npm run build:nsis --` 后面。
+默认生成 `dist/workbuddy-pangpangxiong-0.3.2-setup.exe`。用 `--makensis '<makensis.exe 路径>'` 指定编译器，用 `--output '<新 EXE 路径>'` 修改输出位置，两个选项都放在 `npm run build:nsis --` 后面。
 
 - [安装向导源码](installer/workbuddy-public.nsi)
 - [构建脚本](scripts/build-public-nsis.mjs)
@@ -83,7 +85,7 @@ npm run build:nsis -- --local-workbuddy-root $runtime `
   --local-extractor-root $tools
 ```
 
-生成的 `dist/workbuddy-pangpangxiong-0.3.1-offline-setup.exe` 含客户端载荷，安装时校验后解包。客户端资源来自上述原始安装器，账号、配置和会话数据由安装后的独立实例生成。运行仍需本机 Node.js 22.16 或更新版本。公开发布的安装器使用本机已有的 WorkBuddy 客户端。
+生成的 `dist/workbuddy-pangpangxiong-0.3.2-offline-setup.exe` 含客户端载荷，安装时校验后解包。客户端资源来自上述原始安装器，账号、配置和会话数据由安装后的独立实例生成。运行仍需本机 Node.js 22.16 或更新版本。公开发布的安装器使用本机已有的 WorkBuddy 客户端。
 
 ## 运行模拟测试
 

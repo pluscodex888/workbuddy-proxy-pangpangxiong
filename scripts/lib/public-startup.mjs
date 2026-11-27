@@ -41,7 +41,7 @@ export async function configureDedicatedChild(endpoint, preload, config) {
     const normalized = preload.replaceAll('\\', '/');
     const option = `--require="${normalized}"`;
     const result = await command('Runtime.evaluate', {
-      expression: `process.env.NODE_OPTIONS = ${JSON.stringify(option)}; process.env.WORKBABY_PUBLIC_LAUNCH_CONFIG = ${JSON.stringify(config)}; setImmediate(() => process.getBuiltinModule('node:inspector').close()); true`,
+      expression: `process.env.NODE_OPTIONS = ${JSON.stringify(option)}; process.env.WORKBABY_PUBLIC_LAUNCH_CONFIG = ${JSON.stringify(config)}; process.getBuiltinModule('node:module').createRequire(${JSON.stringify(config)})(${JSON.stringify(normalized)}).prepareDesktopMenu(${JSON.stringify(config)}); setImmediate(() => process.getBuiltinModule('node:inspector').close()); true`,
       returnByValue: true
     });
     if (result.exceptionDetails || result.result?.value !== true) throw Error('startup_configuration_failed');

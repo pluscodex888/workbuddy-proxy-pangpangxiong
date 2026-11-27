@@ -88,6 +88,11 @@ async function attach(daemon, official, config) {
   }
 }
 
+exports.prepareDesktopMenu = configFile => {
+  const { officialRoot } = JSON.parse(fs.readFileSync(configFile, 'utf8'));
+  require('./desktop-community.mjs').preparePublicDesktopCommunity(require('electron'), officialRoot);
+};
+
 if (process.env.WORKBABY_PUBLIC_LAUNCH_CONFIG && /[\\/]daemon-app-server-entry\.js$/.test(process.argv[1] ?? '')) {
   try { install(JSON.parse(fs.readFileSync(process.env.WORKBABY_PUBLIC_LAUNCH_CONFIG, 'utf8'))); }
   catch { process.stderr.write('[workbaby-public] official_fingerprint_or_config_invalid\n'); }
