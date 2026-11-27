@@ -10,9 +10,9 @@
 
 ## 交流 QQ 群
 
-<img src="docs/media/qq-community-qr.png" alt="交流 QQ 群 781090411 的二维码" width="192">
+<img src="docs/media/qq-community-qr.png" alt="交流 QQ 群 794944238 的二维码" width="192">
 
-用手机 QQ 扫码，或搜索群号 **781090411**。
+用手机 QQ 扫码，或搜索群号 **794944238**。
 
 ## 赞助商
 
